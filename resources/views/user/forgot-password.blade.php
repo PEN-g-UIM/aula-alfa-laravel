@@ -4,59 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Recuperação de senha</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <title>Recuperar senha</title>
 </head>
 
-<body class="bg-light">
+<body style="font-family: Arial; max-width: 400px; margin: 80px auto;">
 
-    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <h1>Recuperar senha</h1>
 
-        <div class="card shadow-sm" style="width: 400px;">
-            <div class="card-body">
+    <p>Informe seu e-mail para solicitar a recuperação.</p>
 
-                <h3 class="text-center mb-3">Recuperar senha</h3>
-
-                <p class="text-muted">
-                    Informe seu e-mail para receber o link de recuperação.
-                </p>
-
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        {{ $errors->first() }}
-                    </div>
-                @endif
-
-                <form action="{{ route('password.email') }}" method="POST">
-                    @csrf
-
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-
-                        <input type="email" name="email" id="email" class="form-control"
-                            placeholder="Digite seu e-mail" value="{{ old('email') }}" required autofocus>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-block">
-                        Recuperar senha
-                    </button>
-                </form>
-
-                <div class="text-center mt-3">
-                    <a href="{{ url('/login') }}">Voltar ao login</a>
-                </div>
-
-            </div>
+    @if (session('sucesso'))
+        <div class="alert alert-success">
+            {{ session('sucesso') }}
         </div>
+    @endif
 
-    </div>
+    @if ($errors->any())
+        <p style="color: red">{{ $errors->first() }}</p>
+    @endif
+
+    <form action="{{ route('password.email') }}" method="POST">
+        @csrf
+
+        <label for="email">E-mail:</label>
+
+        <input type="email" id="email" name="email" required
+            style="display: block; width: 100%; padding: 10px; margin: 10px 0;">
+
+        <button type="submit">Recuperar senha</button>
+    </form>
+
+    <p><a href="/register">Voltar ao cadastro</a></p>
 
 </body>
 
