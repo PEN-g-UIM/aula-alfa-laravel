@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @vite('resources/scss/app.scss')
     <title>Recuperar senha</title>
 </head>
 
@@ -14,10 +15,11 @@
     <p>Informe seu e-mail para solicitar a recuperação.</p>
 
     @if (session('sucesso'))
-        <div class="alert alert-success">
-            {{ session('sucesso') }}
-        </div>
-    @endif
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('sucesso') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+@endif
 
     @if ($errors->any())
         <p style="color: red">{{ $errors->first() }}</p>
